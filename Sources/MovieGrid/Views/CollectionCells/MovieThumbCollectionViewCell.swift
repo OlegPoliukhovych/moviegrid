@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 class MovieThumbCollectionViewCell: UICollectionViewCell, CellDescribable {
 
@@ -15,10 +16,16 @@ class MovieThumbCollectionViewCell: UICollectionViewCell, CellDescribable {
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.cornerRadius = 8
+        layer.masksToBounds = true
+    }
+
+    override func prepareForReuse() {
+        imageView.image = nil
     }
 
     func configure(with viewModel: MovieThumbViewModel) {
-
+        guard let url = viewModel.posterUrl else { return }
+        loadImage(with: url, into: imageView)
     }
 
 }

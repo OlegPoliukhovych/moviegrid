@@ -11,8 +11,8 @@ import Foundation
 final class MoviesListViewModel {
 
     private let service: MoviesService
-    private var currentPage = 1
-    private var totalPagesCount = 2
+    private var currentPage = 0
+    private var totalPagesCount = 1
 
     let title = "Latest Movies"
     private var movieViewModels = [MovieThumbViewModel]() {
@@ -34,7 +34,10 @@ final class MoviesListViewModel {
     }
 
     func fetchMovies() {
-        service.fetchMovies(page: currentPage) { [weak self] response in
+        guard currentPage < totalPagesCount else {
+            return
+        }
+        service.fetchMovies(page: currentPage + 1) { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let moviesResponse):

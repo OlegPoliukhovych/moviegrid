@@ -12,16 +12,16 @@ class MoviesListFlowLayout: UICollectionViewFlowLayout {
 
     private var columns = CGFloat()
     private var cellPadding = CGFloat()
-    private var itemHeight = CGFloat()
+    private var ratio = CGFloat()
 
     convenience init(numberOfColumns: CGFloat,
                      cellPadding: CGFloat,
-                     itemHeight: CGFloat,
+                     ratio: CGFloat,
                      sectionInset: UIEdgeInsets = .zero) {
         self.init()
         self.cellPadding = cellPadding
         self.columns = numberOfColumns
-        self.itemHeight = itemHeight
+        self.ratio = ratio
         self.sectionInset = sectionInset
     }
 
@@ -33,7 +33,7 @@ class MoviesListFlowLayout: UICollectionViewFlowLayout {
         itemWidth = (collectionView.bounds.width - insets - (cellPadding * (columns - 1))) / columns
         minimumLineSpacing = cellPadding
         minimumInteritemSpacing = cellPadding
-        itemSize = CGSize(width: itemWidth, height: itemHeight)
+        itemSize = CGSize(width: itemWidth, height: itemWidth * ratio)
 
     }
 

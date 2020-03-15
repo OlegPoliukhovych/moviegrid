@@ -4,5 +4,6 @@ target 'MovieGrid' do
   use_frameworks!
 
   pod 'SwiftLint'
+  pod 'Nuke', '~> 8.0'
 
 end

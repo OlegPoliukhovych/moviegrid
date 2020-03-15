@@ -16,12 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        let storyboard = UIStoryboard(name: "MoviesList", bundle: nil)
-        let rootVC = storyboard.instantiateInitialViewController()
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.darkGray,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .light)]
 
+        let storyboard = UIStoryboard(name: "MoviesList", bundle: nil)
+        let rootVC = storyboard.instantiateInitialViewController()!
+        let navContrroller = UINavigationController(rootViewController: rootVC)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = rootVC
+        window?.rootViewController = navContrroller
 
         return true
     }
