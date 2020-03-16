@@ -16,18 +16,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.darkGray,
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .light)]
+        setupAppearance()
+        setupRootVC()
 
+        return true
+    }
+
+}
+
+// MARK: Helpers
+
+/// Provided logic better to move to Coordinator or another navigation solution, for example Router
+
+private extension AppDelegate {
+
+    func setupAppearance() {
+        UINavigationBar.appearance().tintColor = UIColor.gray
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.gray,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .light)
+        ]
+    }
+
+    func setupRootVC() {
         let storyboard = UIStoryboard(name: "MoviesList", bundle: nil)
         let rootVC = storyboard.instantiateInitialViewController()!
         let navContrroller = UINavigationController(rootViewController: rootVC)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = navContrroller
-
-        return true
     }
-
 }

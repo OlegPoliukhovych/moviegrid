@@ -10,11 +10,11 @@ import UIKit
 
 class MoviesListFlowLayout: UICollectionViewFlowLayout {
 
-    private var columns = CGFloat()
+    private var columns: Int = 1
     private var cellPadding = CGFloat()
     private var ratio = CGFloat()
 
-    convenience init(numberOfColumns: CGFloat,
+    convenience init(numberOfColumns: Int,
                      cellPadding: CGFloat,
                      ratio: CGFloat,
                      sectionInset: UIEdgeInsets = .zero) {
@@ -30,11 +30,15 @@ class MoviesListFlowLayout: UICollectionViewFlowLayout {
         var itemWidth = CGFloat()
 
         let insets = sectionInset.left + sectionInset.right
-        itemWidth = (collectionView.bounds.width - insets - (cellPadding * (columns - 1))) / columns
+        itemWidth = (collectionView.bounds.width - insets - (cellPadding * (CGFloat(columns) - 1))) / CGFloat(columns)
         minimumLineSpacing = cellPadding
         minimumInteritemSpacing = cellPadding
         itemSize = CGSize(width: itemWidth, height: itemWidth * ratio)
 
+    }
+
+    func setNumberOfColumns(_ columns: Int) {
+        self.columns = columns
     }
 
     override func invalidateLayout() {

@@ -6,6 +6,8 @@
 //  Copyright © 2020 Oleg Poliukhovych. All rights reserved.
 //
 
-enum APIPaths: String {
-    case postersPath = "https://image.tmdb.org/t/p/w342"
+import Foundation
+
+struct Constants {
+    static let postersPath = URL(string: "https://image.tmdb.org/t/p/w342")!
 }

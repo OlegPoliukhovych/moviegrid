@@ -13,11 +13,10 @@ struct MovieThumbViewModel {
     let posterUrl: URL?
 
     init(model: Movie) {
-        guard let posterPath = model.posterPath,
-            let baseUrl = URL(string: APIPaths.postersPath.rawValue) else {
+        guard let posterPath = model.posterPath else {
             posterUrl = nil
             return
         }
-        posterUrl = baseUrl.appendingPathComponent(posterPath)
+        posterUrl = Constants.postersPath.appendingPathComponent(posterPath)
     }
 }

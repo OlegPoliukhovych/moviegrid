@@ -15,6 +15,7 @@ final class MoviesListViewModel {
     private var totalPagesCount = 1
 
     let title = "Latest Movies"
+    private var movies = [Movie]()
     private var movieViewModels = [MovieThumbViewModel]() {
         didSet {
             listUpdated?()
@@ -30,6 +31,7 @@ final class MoviesListViewModel {
     private func update(with response: MoviesResponse) {
         currentPage = response.page
         totalPagesCount = response.totalPages
+        movies.append(contentsOf: response.results)
         movieViewModels.append(contentsOf: response.results.map(MovieThumbViewModel.init))
     }
 
@@ -58,6 +60,11 @@ final class MoviesListViewModel {
     func movieThumb(at index: Int) -> MovieThumbViewModel? {
         guard index < movieViewModels.count else { return nil }
         return movieViewModels[index]
+    }
+
+    func movieDetailViewModel(at index: Int) -> MovieDetailViewModel? {
+        guard index < movies.count else { return nil }
+        return MovieDetailViewModel(model: movies[index])
     }
 
 }
